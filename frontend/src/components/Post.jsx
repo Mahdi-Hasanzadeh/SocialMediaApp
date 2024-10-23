@@ -41,7 +41,7 @@ const Post = ({ post }) => {
   const likeOrDislikeHandler = async () => {
     try {
       const action = liked ? 'dislike' : 'like';
-      const res = await axios.get(`http://localhost:8000/api/v2/post/${post?._id}/${action}`, { withCredentials: true });
+      const res = await axios.get(`https://socialmediaapp-waa8.onrender.com/api/v2/post/${post?._id}/${action}`, { withCredentials: true });
 
       if (res.data.success) {
         const updatedLikes = liked ? postLike - 1 : postLike + 1;
@@ -66,7 +66,7 @@ const Post = ({ post }) => {
 
   const commentHandler = async () => {
     try {
-      const res = await axios.post(`http://localhost:8000/api/v2/post/${post._id}/comment`, { text }, {
+      const res = await axios.post(`https://socialmediaapp-waa8.onrender.com/api/v2/post/${post._id}/comment`, { text }, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -92,7 +92,7 @@ const Post = ({ post }) => {
 
   const deletePostHandler = async () => {
     try {
-      const res = await axios.delete(`http://localhost:8000/api/v2/post/delete/${post?._id}`, { withCredentials: true });
+      const res = await axios.delete(`https://socialmediaapp-waa8.onrender.com/api/v2/post/delete/${post?._id}`, { withCredentials: true });
 
       if (res.data.success) {
         const updatedPostData = posts.filter((postItem) => postItem?._id !== post?._id);
@@ -108,7 +108,7 @@ const Post = ({ post }) => {
   const bookmarkHandler = async() => {
     try {
       const action = bookmarked ? 'remove' : 'add';
-      const res = await axios.get(`http://localhost:8000/api/v2/post/${post?._id}/bookmark`,{withCredentials:true});
+      const res = await axios.get(`https://socialmediaapp-waa8.onrender.com/api/v2/post/${post?._id}/bookmark`,{withCredentials:true});
 
       if(res.data.success){
         const newBookmarkState = !bookmarked;
