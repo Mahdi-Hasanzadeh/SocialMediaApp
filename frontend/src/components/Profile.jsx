@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import { AtSign, Heart, MessageCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 
 const Profile = () => {
@@ -16,7 +17,19 @@ const Profile = () => {
   const { userProfile, user } = useSelector(store => store.auth);
   const isLoggedInUserProfile = user?._id === userProfile?._id;
 
-  const isFollowing = false;
+  const [isFollowing,setIsFollowing] = useState(false) 
+
+  const followHandler = ()=>{
+
+    if(isFollowing === true){
+      toast.success("Unfollow successfully")
+    }else{
+      toast.success("Follow successfully")
+    }
+    setIsFollowing(prev=>!prev)
+    
+    
+  }
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -49,11 +62,11 @@ const Profile = () => {
                     ) : (
                       isFollowing ? (
                         <>
-                          <Button variant="secondary" className="hover:bg-gray-200 h-8">Unfollow</Button>
-                          <Button variant="secondary" className="hover:bg-gray-200 h-8">Message</Button>
+                          <Button variant="secondary" className="hover:bg-gray-200 h-8" onClick={followHandler}>Unfollow</Button>
+                          <Button variant="secondary" className="hover:bg-gray-200 h-8" ><Link to={"/chat"}>Message</Link></Button>
                         </>
                       ) : (
-                        <Button className="bg-[#0085F6] hover:bg-[#3192d2] h-8">Follow</Button>
+                        <Button className="bg-[#0085F6] hover:bg-[#3192d2] h-8" onClick={followHandler}>Follow</Button>
                       )
 
                     )
